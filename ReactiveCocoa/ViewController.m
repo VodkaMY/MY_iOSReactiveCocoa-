@@ -14,7 +14,7 @@
 
 @end
 
-@implementation ViewController 
+@implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -23,11 +23,11 @@
 }
 #pragma mark - 过滤
 /**
-    ignore
-    filter:适用于文本框
-    take
-    distinctUntilChanged
-    skip:跳过几个信号
+ ignore
+ filter:适用于文本框
+ take
+ distinctUntilChanged
+ skip:跳过几个信号
  */
 -(void)skip
 {
@@ -128,11 +128,11 @@
 }
 #pragma mark - ReactiveCocoa组合
 /**
-    concat:顺序请求
-    then:忽略1信号
-    merge:只要有一个请求就会发送信号
-    zipwith:两个信号同时发送信号,压缩信号为tuple元组, 发送next,所有请求完成
-    combineLatest与reduce组合:组常用的,一定要掌握
+ concat:顺序请求
+ then:忽略1信号
+ merge:只要有一个请求就会发送信号
+ zipwith:两个信号同时发送信号,压缩信号为tuple元组, 发送next,所有请求完成
+ combineLatest与reduce组合:组常用的,一定要掌握
  */
 -(void)zipSignal
 {
@@ -458,6 +458,12 @@
 }
 
 #pragma mark - rac常用宏
+/*
+    RAC
+    RACObserve
+    @weakify(self)/@strongify(self)
+    RACTuplePack/RACTupleUnpack
+ */
 -(void)ReactiveCocoa
 {
     
@@ -475,14 +481,14 @@
     }];
     
     //3. 解决强引用
-//    @weakify(self);
-//    RACSignal * signal = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-//        @strongify(self);
-//        NSLog(@"%@",self);
-//        
-//        return nil;
-//    }];
-//    _signal = signal;
+    @weakify(self);
+    RACSignal * signal = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        @strongify(self);
+        NSLog(@"%@",self);
+        
+        return nil;
+    }];
+    //    _signal = signal;
     
     //4. 包装元组
     RACTuple * tuple = RACTuplePack(@"1",@"2");
@@ -490,6 +496,14 @@
 }
 
 #pragma mark - rac常用开发场景
+/*
+ 1. 代替代理: RACSubject
+ 2. 代替KVO
+ 3. 监听事件
+ 4. 代替通知
+ 5. 监听文本框
+ 6. 当有多个请求时, 请求全部完成才能显示界面liftSelector
+ */
 -(void)RACPutIntoUse
 {
     //RAC开发中常用的场景
